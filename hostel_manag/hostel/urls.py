@@ -29,4 +29,5 @@ urlpatterns = [
     path('visitor_save/',views.saveVisitorDetails,name="visitor_save"),
     path('student_save/',views.saveStudentDetails,name="student_save"),
     path('about_us/',views.aboutUs,name="about_us"),
+    path('student_details/',views.student_details,name="student_details"),
 ]

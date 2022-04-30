@@ -51,15 +51,6 @@ def home(request):
     return render(request,'hostel/homepage.html')
 def aboutUs(request):
     return render(request,'hostel/about_us.html')
-
-# def createUser(request):
-#     if request.method == 'POST':
-#             username = request.POST('uname')
-#             password=request.POST('password')
-#             p = User(uname=username,password=password)
-#             p.save()
-
-#     return render(request,'hostel/login.html')
     
 def saveStudentDetails(request):
     if request.method =='POST':
@@ -98,4 +89,8 @@ def facilities(request):
 
 def student_registration(request):
     return render(request,'hostel/student_registration.html')
+
+def student_details(request):
+    s1={'student':studentDetails.objects.all()}
+    return render(request,'hostel/table.html',s1)
 
