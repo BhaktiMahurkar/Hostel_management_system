@@ -39,10 +39,28 @@ def login_user(request):
             # if user.is_active:
             return redirect('home-page')
         else:
-            messages.error(request, f'Invalid Login Credentials')
             return redirect('login-page')
 
     return render(request,'hostel/login.html')
+
+from django.contrib.auth import login, authenticate  # add to imports
+
+# def login_page(request):
+#     message = ''
+#     if request.method == 'POST':
+#         form = forms.LoginForm(request.POST)
+#         if form.is_valid():
+#             user = authenticate(
+#                 username=form.cleaned_data['username'],
+#                 password=form.cleaned_data['password'],
+#             )
+#             if user is not None:
+#                 login(request, user)
+#                 message = f'Hello {user.username}! You have been logged in'
+#             else:
+#                 message = 'Login failed!'
+#     return render(
+#         request, 'authentication/login.html', context={'form': form, 'message': message})
 
 
 
