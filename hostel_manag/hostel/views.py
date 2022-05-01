@@ -117,3 +117,5 @@ def facilities(request):
 def student_registration(request):
     return render(request,'hostel/student_registration.html')
 
+def profile(request):
+    return render(request,'hostel/profile.html')

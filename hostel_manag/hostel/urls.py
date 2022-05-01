@@ -25,6 +25,7 @@ urlpatterns = [
     path('registration/',views.student_registration,name="student_registration"),
     path('visitordetails/',views.visitor_registration,name="visitor_registration"),
     path('facilities/',views.facilities,name="facilities"),
+    path('profile/',views.profile,name="profile"),
     path('contact_save/',views.saveContactDetails,name="contact_save"),
     path('visitor_save/',views.saveVisitorDetails,name="visitor_save"),
     path('student_save/',views.saveStudentDetails,name="student_save"),
