@@ -20,5 +20,6 @@ from hostel import views as hostel_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('hostel.urls')),
-    path('users/',include('users.urls')),
+    path('student_details/',include('users.urls')),
+
 ]

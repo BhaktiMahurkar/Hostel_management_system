@@ -1,9 +1,11 @@
+from unicodedata import name
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from hostel.models import contactUs,VisitorDetails,studentDetails
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 def saveContactDetails(request):
     if request.method=='POST':
@@ -39,13 +41,32 @@ def login_user(request):
             # if user.is_active:
             return redirect('home-page')
         else:
-            messages.error(request, f'Invalid Login Credentials')
             return redirect('login-page')
 
     return render(request,'hostel/login.html')
 
+from django.contrib.auth import login, authenticate  # add to imports
+
+# def login_page(request):
+#     message = ''
+#     if request.method == 'POST':
+#         form = forms.LoginForm(request.POST)
+#         if form.is_valid():
+#             user = authenticate(
+#                 username=form.cleaned_data['username'],
+#                 password=form.cleaned_data['password'],
+#             )
+#             if user is not None:
+#                 login(request, user)
+#                 message = f'Hello {user.username}! You have been logged in'
+#             else:
+#                 message = 'Login failed!'
+#     return render(
+#         request, 'authentication/login.html', context={'form': form, 'message': message})
 
 
+def profile(request):
+    return render(request,'hostel/profile.html')
 
 def home(request):
     return render(request,'hostel/homepage.html')
@@ -90,7 +111,28 @@ def facilities(request):
 def student_registration(request):
     return render(request,'hostel/student_registration.html')
 
+@staff_member_required(redirect_field_name='login-page',  login_url='login-page')
 def student_details(request):
     s1={'student':studentDetails.objects.all()}
-    return render(request,'hostel/table.html',s1)
+    return render(request,'users/table.html',s1)
+
+@staff_member_required(redirect_field_name='login-page',  login_url='login-page')
+def add_student(request):
+    if request.method == "POST":
+        uname = request.POST['uname1']
+        pass1 = request.POST['pass']
+        name = request.POST['name1'].split()
+        try:
+            user = User.objects.create_user(username=uname, password = pass1)
+            user.first_name = name
+            user.save()
+            prof = studentDetails(user = user)
+            prof.fname = name[0]
+            prof.lname = name[1]
+            prof.save()
+            messages.success(request, "Student added successfully!")
+        except:
+            messages.error(request, "Username already exists!!")
+        
+    return render(request,'hostel/add_student.html')
 

@@ -78,9 +78,14 @@
               <span class="line line3"></span>
           </div>
           <ul class="menu-items">
-              <li><a href="#home">Home</a></li>
-              <li><a href="{% url 'facilities' %}">About</a></li>
-              <li><a href="{% url 'facilities' %}">Funtionalities</a></li>
+              <li><a href="{% url 'home-page' %}">Home</a></li>
+              <li><a href="{% url 'about_us' %}">About</a></li>
+              {% if request.user.is_staff %}
+              <li><a href="{% url 'student_details' %}">Student Details</a></li>
+              {% else %}
+              <li><a href="{% url 'profile' %}">Profile</a></li>
+              {% endif %}
+
               <li><a href="#contact">Contact</a></li>
               <li><a href="#logout">Log Out</a></li>
           </ul>

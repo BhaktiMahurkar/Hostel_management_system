@@ -1,4 +1,5 @@
 import email
+from tkinter import CASCADE
 from django.db import models
 from django.forms import CharField, EmailField, NumberInput,TimeInput,TimeField,DateField
 from django.contrib.auth.models import User
@@ -23,6 +24,7 @@ class VisitorDetails(models.Model):
         return self.fname
 
 class studentDetails(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     fname=models.CharField(max_length=30, null=True)
     lname=models.CharField(max_length=30,null=True)
     dob=models.DateField(null=True)

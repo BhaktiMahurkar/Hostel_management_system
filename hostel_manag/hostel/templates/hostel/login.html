@@ -43,20 +43,27 @@
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                             <span class="h1 fw-bold mb-0">Hostel Management</span>
                                         </div>
+                                        {% comment %} do this {% endcomment %}
+                                        {% comment %} {% if user.is_authenticated == False %} 
+                                        <div class="alert alert-danger" role="alert">
+                                           Invalid login Credentials
+                                        </div>
+                                            print("hello")
+                                        {% endif %} {% endcomment %}
 
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
                                             account</h5>
-
+                                    
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="form2Example17"
-                                                class="form-control form-control-lg" name="username" />
-                                            <label class="form-label" for="form2Example17"  id="username">Username</label>
+                                            <input type="text" id="username"
+                                                class="form-control form-control-lg" name="username">
+                                            <label class="form-label" for="username">Username</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="form2Example27"
-                                                class="form-control form-control-lg" </input>
-                                            <label class="form-label" for="form2Example27"  id="password">Password</label>
+                                            <input type="password" id="password" name="password"
+                                                class="form-control form-control-lg ">
+                                            <label class="form-label" for="password">Password</label>
                                         </div>
 
                                         <div class="pt-1 mb-4">
