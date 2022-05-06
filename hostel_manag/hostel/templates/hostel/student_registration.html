@@ -13,6 +13,74 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" type="text/css" href="{% static 'hostel/student_registration.css' %}">
+        <style>
+            body {
+           color: #68a7ad;
+           overflow-x: hidden;
+           height: 100%;
+           background-color: #68a7ad;
+    /* background-image: url("https://i.imgur.com/GMmCQHC.png"); */
+           background-repeat: no-repeat;
+           background-size: 100% 100%
+           
+            }
+            input:focus,
+    textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #68a7ad;
+    outline-width: 0;
+    font-weight: 400
+}
+
+.card {
+    padding: 30px 40px;
+    margin-top: auto;
+    background-color: white;
+    /* margin-bottom: 60px; */
+    border: none !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+    
+}
+input,
+textarea,
+button {
+    padding: 8px 15px;
+    border-radius: 5px !important;
+    margin: 5px 0px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 18px !important;
+    font-weight: 300
+}
+.btn-block {
+    text-transform: uppercase;
+    font-size: 15px !important;
+    font-weight: 400;
+    height: 43px;
+    cursor: pointer;
+    border-radius: 5px;
+    color:black;
+    background-color: #68a7ad;
+}
+.btn-block:hover {
+    color: black !important;
+    background-color: #e5cb95;
+}
+#year
+{
+    height:43px;
+    padding: 8px 15px;
+    border-radius: 5px !important;
+    margin: 5px 0px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 18px !important;
+    font-weight: 300
+}
+
+</style>
     <title>Student Page</title>
 </head>
 <body>
@@ -26,6 +94,21 @@
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Student Name<span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname" placeholder="Enter your name" onblur="validate(1)"> </div>
                             <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Parent Name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter parent name" onblur="validate(2)"> </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Branch<span class="text-danger"> *</span></label> <input type="text" id="branch" name="branch" placeholder="Enter your branch" onblur="validate(1)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Year<span class="text-danger"> *</span></label> <select name="year" id="year">
+                                <option value="FE">FE</option>
+                                <option value="SE">SE</option>
+                                <option value="TE">TE</option>
+                                <option value="BE">BE</option>
+                              </select>
+                              <!-- <input type="text" id="year" name="year" placeholder="Enter year" onblur="validate(2)">  -->
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Registration ID<span class="text-danger"> *</span></label> <input type="text" id="reg" name="reg" placeholder="Enter your Registration id number" onblur="validate(1)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Roll Number<span class="text-danger"> *</span></label> <input type="text" id="roll" name="roll" placeholder="Enter parent Roll number" onblur="validate(2)"> </div>
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Date Of Birth<span class="text-danger"> *</span></label> <input type="date" id="dob" name="dob" placeholder="Enter your DOB" onblur="validate(3)"> </div>
@@ -65,7 +148,7 @@
 
                             <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone Number of the Guardian<span class="text-danger"> *</span></label> <input type="number" id="gnumber" name="gnumber" placeholder="Enter Phone Number of the Guardian" onblur="validate(15)"> </div>
 
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Relation of the Guardian with Student<span class="text-danger"> *</span></label> <input type="text" id="rel" name="rel" placeholder="Enter realtion of the Guardian with Student" onblur="validate(16)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Relation of the Guardian with Student<span class="text-danger"> *</span></label> <input type="text" id="rel" name="rel" placeholder="Enter relation of the Guardian with Student" onblur="validate(16)"> </div>
 
                             <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Student Photo<span class="text-danger"> *</span></label>
 
