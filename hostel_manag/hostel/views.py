@@ -141,6 +141,11 @@ def facilities(request):
 
 def student_registration(request):
     return render(request,'hostel/student_registration.html')
+<<<<<<< HEAD
+=======
+
+# <<<<<<< HEAD
+>>>>>>> dd1516d085a0d10181c8af695b0b7a5dafaa1c59
 @staff_member_required(redirect_field_name='login-page',  login_url='login-page')
 def student_details(request):
     s1={'student':studentDetails.objects.all()}
@@ -166,6 +171,7 @@ def add_student(request):
         
     return render(request,'hostel/add_student.html')
 
+<<<<<<< HEAD
 def profile(request):
     try: 
         std = studentDetails.objects.get(user = request.user)
@@ -179,3 +185,9 @@ def profile(request):
     
     return render(request,'hostel/profile.html',info)
 
+=======
+# =======
+def profile(request):
+    return render(request,'hostel/profile.html')
+# >>>>>>> f6b251f69f378841ccf4ba6d31ed8b6352131788
+>>>>>>> dd1516d085a0d10181c8af695b0b7a5dafaa1c59
