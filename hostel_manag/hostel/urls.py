@@ -18,6 +18,7 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path
 from . import views
+from . views import PostUpdateView
 
 
 urlpatterns = [
@@ -25,14 +26,16 @@ urlpatterns = [
     path('',views.login_user,name="login-page"),
     path('home/',views.home,name="home-page"),
     path('registration/',views.student_registration,name="student_registration"),
-    # path('student_details/registration/',views.student_registration,name="registration"),
     path('visitordetails/',views.visitor_registration,name="visitor_registration"),
     path('facilities/',views.facilities,name="facilities"),
-    path('profile/',views.profile,name="profile"),
     path('contact_save/',views.saveContactDetails,name="contact_save"),
     path('visitor_save/',views.saveVisitorDetails,name="visitor_save"),
     path('student_save/',views.saveStudentDetails,name="student_save"),
     path('about_us/',views.aboutUs,name="about_us"),
+    path('logout/',views.logout,name="logout"),
     path('profile/',views.profile,name="profile"),
+    path('view_profile/<int:user_pk>',views.view_profile,name="view_profile"),
     # path('student_details/',views.student_details,name="student_details"),
+    #  path('post/<int:pk>/update',PostUpdateView.as_view(),name="post-update"),
+    # path('post/<int:pk>/delete',PostDeleteView.as_view(),name="post-delete"),
 ]

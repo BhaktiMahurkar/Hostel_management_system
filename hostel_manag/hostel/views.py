@@ -6,6 +6,24 @@ from hostel.models import contactUs,VisitorDetails,studentDetails
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic import UpdateView,DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+
+
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model=studentDetails
+    fields=['user','fname','lname','dob','mob','mob1','mob2','email1','email2','state','caste','nation','aadhar','pan','blood','allergy','guard','gaddress','gnumber','sphoto','aphoto','svaccine','certi']
+
+    def form_valid(self,form):
+        form.instance.author=self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        studentDetails=self.get_object()
+        if self.request.user==studentDetails.fname:
+            return True
+        else:
+            return False
 
 def saveContactDetails(request):
     if request.method=='POST':
@@ -41,8 +59,9 @@ def login_user(request):
             # if user.is_active:
             return redirect('home-page')
         else:
+            messages.success(request, "Wrong login credentials!")
             return redirect('login-page')
-
+    
     return render(request,'hostel/login.html')
 
 from django.contrib.auth import login, authenticate  # add to imports
@@ -65,11 +84,15 @@ from django.contrib.auth import login, authenticate  # add to imports
 #         request, 'authentication/login.html', context={'form': form, 'message': message})
 
 
-def profile(request):
-    return render(request,'hostel/profile.html')
+# def profile(request):
+#     return render(request,'hostel/viewprof.html')
 
 def home(request):
     return render(request,'hostel/homepage.html')
+
+def logout(request):
+    return render(request,'hostel/logout.html')
+
 def aboutUs(request):
     return render(request,'hostel/about_us.html')
     
@@ -105,13 +128,19 @@ def saveStudentDetails(request):
 def visitor_registration(request):
     return render(request,'hostel/visitor.html')
 
+def view_profile(request, user_pk):
+    # user = User.objects.get(username = uname)
+    profile = studentDetails.objects.get(pk = user_pk)
+    context = {
+        "profile":profile
+    }
+    return render(request,'hostel/viewprof.html', context)
+
 def facilities(request):
     return render(request,'hostel/facilities.html')
 
 def student_registration(request):
     return render(request,'hostel/student_registration.html')
-
-<<<<<<< HEAD
 @staff_member_required(redirect_field_name='login-page',  login_url='login-page')
 def student_details(request):
     s1={'student':studentDetails.objects.all()}
@@ -137,7 +166,16 @@ def add_student(request):
         
     return render(request,'hostel/add_student.html')
 
-=======
 def profile(request):
-    return render(request,'hostel/profile.html')
->>>>>>> f6b251f69f378841ccf4ba6d31ed8b6352131788
+    try: 
+        std = studentDetails.objects.get(user = request.user)
+        if std.mob1:
+            canAccessProfile = True
+        else:
+            canAccessProfile = False
+    except:
+        canAccessProfile = False
+    info={'st': studentDetails.objects.all(),'user':User.first_name, 'canAccessProfile':canAccessProfile}
+    
+    return render(request,'hostel/profile.html',info)
+

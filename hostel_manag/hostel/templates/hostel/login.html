@@ -29,6 +29,7 @@
                 <div class="col col-xl-10">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">
+
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
                                 <img class="img1" src="{% static 'hostel/loginpage.png'  %}" 
                                     alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
@@ -38,7 +39,11 @@
 
                                     <form method="POST" action="{% url 'login-page' %}" >
                                         {% csrf_token %}
-
+                                        {% for message in messages %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{message}}
+                                          </div>
+                                        {% endfor %}
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                             <span class="h1 fw-bold mb-0">Hostel Management</span>
@@ -71,8 +76,8 @@
                                         </div>
 
                                         <a class="small text-muted" href="#!">Forgot password?</a>
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
-                                                href="#!" style="color: #393f81;">Register here</a></p>
+                                        <!-- <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="#!" style="color: #393f81;">Register here</a></p> -->
                                     </form>
 
                                 </div>
