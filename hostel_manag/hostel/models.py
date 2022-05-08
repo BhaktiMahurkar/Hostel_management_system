@@ -1,9 +1,14 @@
 import email
-from tkinter import CASCADE
+from django import forms
 from django.db import models
 from django.forms import CharField, EmailField, NumberInput,TimeInput,TimeField,DateField
 from django.contrib.auth.models import User
-
+YEAR_CHOICES =[
+    ('FE','FE'),
+    ('SE', 'SE'),
+    ('TE','TE'),
+    ('BE','BE'),    
+]
 class contactUs(models.Model):
     name=models.CharField(max_length=50)
     email_id=models.EmailField()
@@ -24,9 +29,17 @@ class VisitorDetails(models.Model):
         return self.fname
 
 class studentDetails(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     fname=models.CharField(max_length=30, null=True)
     lname=models.CharField(max_length=30,null=True)
+    branch=models.CharField(max_length=30,null=True)
+   
+    class UserForm(forms.Form):
+        
+        year= forms.CharField(widget=forms.Select(choices= YEAR_CHOICES))
+    YEAR= models.CharField(max_length=6, choices=YEAR_CHOICES, default='FE',null=True)
+    # year=models.CharField(max_length=30,null=True)
+    reg=models.CharField(max_length=30,null=True)
+    roll=models.IntegerField(max_length=30,null=True)
     dob=models.DateField(null=True)
     mob=models.CharField(max_length=100,null=True)
     mob1=models.IntegerField(max_length=10,null=True)
@@ -51,7 +64,4 @@ class studentDetails(models.Model):
     certi=models.FileField(null=True)
     def __str__(self):
         return self.fname
-
-
-
 
