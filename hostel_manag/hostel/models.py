@@ -30,38 +30,36 @@ class VisitorDetails(models.Model):
 
 class studentDetails(models.Model):
     fname=models.CharField(max_length=30, null=True)
-    lname=models.CharField(max_length=30,null=True)
+    lname=models.CharField(max_length=30,default= " ",null=True)
     branch=models.CharField(max_length=30,null=True)
    
-    class UserForm(forms.Form):
-        
-        year= forms.CharField(widget=forms.Select(choices= YEAR_CHOICES))
-    YEAR= models.CharField(max_length=6, choices=YEAR_CHOICES, default='FE',null=True)
+    
+    year= models.CharField(max_length=6, choices=YEAR_CHOICES, default='FE',null=True)
     # year=models.CharField(max_length=30,null=True)
     reg=models.CharField(max_length=30,null=True)
-    roll=models.IntegerField(max_length=30,null=True)
+    roll=models.IntegerField(null=True)
     dob=models.DateField(null=True)
     mob=models.CharField(max_length=100,null=True)
-    mob1=models.IntegerField(max_length=10,null=True)
-    mob2=models.IntegerField(max_length=10,null=True)
+    mob1=models.IntegerField(null=True)
+    mob2=models.IntegerField(null=True)
     email1=models.EmailField(null=True)
     email2=models.EmailField(null=True)
     hometown=models.CharField(max_length=20,null=True)
     state=models.CharField(max_length=30,null=True)
     caste=models.CharField(max_length=30,null=True)
     nation=models.CharField(max_length=30,null=True)
-    aadhar=models.IntegerField(max_length=16,null=True)
+    aadhar=models.IntegerField(null=True)
     pan=models.CharField(max_length=8,null=True)
     blood=models.CharField(max_length=10,null=True)
     allergy=models.CharField(max_length=30,null=True)
     guard=models.CharField(max_length=30,null=True)
     gaddress=models.CharField(max_length=100,null=True)
-    gnumber=models.IntegerField(max_length=10,null=True)
+    gnumber=models.IntegerField(null=True)
     rel=models.CharField(max_length=30,null=True)
-    sphoto=models.FileField(null=True)
-    aphoto=models.FileField(null=True)
-    svaccine=models.FileField(null=True)
-    certi=models.FileField(null=True)
+    sphoto=models.ImageField(null=True, upload_to='images/')
+    aphoto=models.ImageField(null=True, upload_to='images/')
+    svaccine=models.ImageField(null=True, upload_to='images/')
+    certi=models.ImageField(null=True, upload_to='images/')
     def __str__(self):
-        return self.fname
+        return self.fname 
 
