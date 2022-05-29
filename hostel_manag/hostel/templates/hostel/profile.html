@@ -16,10 +16,37 @@
 </head>
 
 <body>
+    <nav class="navbar n1">
+        <div class="navbar-container container n1">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <ul class="menu-items m1">
+                <li><a href="{% url 'home-page' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About</a></li>
+                {% if request.user.is_staff %}
+                <li><a href="{% url 'student_details' %}">Student Details</a></li>
+                {% else %}
+                {% if canAccessProfile %}
+                <li><a href="{% url 'view_profile' std.pk %}">Profile</a></li>
+                {% else %}
+                <li><a href="{% url 'student_registration' %}">Fill Form</a></li>
+                {% endif %}
+                {% endif %}
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="{%url 'logout'%}">Logout</a></li>
+            </ul>
+            {% comment %} <img class="logo" src="{%static 'hostel/loginpage.png' %}" alt=""> {% endcomment %}
+            <img class="logo l1" src="{%static '/hostel/loginpage.png' %}" alt="">
+        </div>
+    </nav>
     <div class="container d-flex justify-content-center">
         <div class="card p-3 py-4">
             <div class="text-center"> <img src="{%static 'hostel/photo.jpg' %}" width="100" class="rounded-circle">
-                <h3 class="mt-2">Maria Smantha</h3> <span class="mt-1 clearfix">Student</span>
+                <h3 class="mt-2">{{std.fname}}</h3> <span class="mt-1 clearfix">Student</span>
                 <div class="row mt-3 mb-3">
                     <div class="col-md-4">
                         <h6>Roll No.</h6> <span class="num">10</span>
@@ -36,11 +63,6 @@
                         class="neo-button"><i class="fa fa-google fa-1x"></i> </button> <button class="neo-button"><i
                             class="fa fa-youtube fa-1x"></i> </button> <button class="neo-button"><i
                             class="fa fa-twitter fa-1x"></i> </button> </div> -->
-                {% if canAccessProfile %}
-                <a href="{% url 'registration' %}" class="btn btn-secondary bt1">View Profile</a>
-                {% else %}
-                <a href="{% url 'registration' %}" class="btn btn-secondary bt1">Fill form</a>
-                {% endif %}
                 
             </div>
         </div>

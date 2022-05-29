@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="{% static 'hostel/homepage.css' %}">
     <style>
       .logo{
-        width: 60px;
+        width: 65px;
     margin-bottom: 20px;
     margin-top: 2px;
+    float:left;
       }
 
       .title1{
@@ -30,12 +31,14 @@
       }
       
       .showcase-area {
-  height: 70vh;
-  background: linear-gradient(
+  {% comment %} height: 70vh; {% endcomment %}
+      height:100%;
+      background: linear-gradient(
       rgba(240, 240, 240, 0.144),
       rgba(255, 255, 255, 0.336)
     ),
-    url("https://thumbs.dreamstime.com/b/hotel-hostel-building-blue-sky-vector-illustration-94109452.jpg");
+    url("https://www.hotelogix.com/blog/wp-content/uploads/2014/07/Effective-Hostel-PMS-for-Hostel-Management.jpg");
+    {% comment %} https://thumbs.dreamstime.com/b/hotel-hostel-building-blue-sky-vector-illustration-94109452.jpg {% endcomment %}
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,41 +69,65 @@
   color: #fff;
   background: rgb(0, 0, 0);
 }
+#home{
+  font-size:80px;
+  font-weight:800;
+
+}
+#home1{
+  font-size:50px;
+}
+.n1{
+  height: 3.5rem;
+}
+.m1{
+  margin-top: 0.5rem;
+}
+.l1{
+  margin-top: 0.5rem;
+  float:left;
+}
     </style>
   </head>
   <body>
-    <nav class="navbar">
-      <div class="navbar-container container">
+    <nav class="navbar n1">
+      <div class="navbar-container container n1">
           <input type="checkbox" name="" id="">
           <div class="hamburger-lines">
               <span class="line line1"></span>
               <span class="line line2"></span>
               <span class="line line3"></span>
           </div>
-          <ul class="menu-items">
+          <ul class="menu-items m1">
               <li><a href="{% url 'home-page' %}">Home</a></li>
               <li><a href="{% url 'about_us' %}">About</a></li>
+              <li><a href="{% url 'rules' %}">Rules</a></li>
               {% if request.user.is_staff %}
               <li><a href="{% url 'student_details' %}">Student Details</a></li>
               {% else %}
-              <li><a href="{% url 'profile' %}">Profile</a></li>
+              {% if canAccessProfile %}
+              <li><a href="{% url 'view_profile' std.pk %}">Profile</a></li>
+              {% else %}
+              <li><a href="{% url 'student_registration' %}">Fill Form</a></li>
+              {% endif %}
               {% endif %}
               <li><a href="#contact">Contact</a></li>
               <li><a href="{%url 'logout'%}">Logout</a></li>
           </ul>
-          <img class="logo" src="{%static 'hostel/loginpage.png' %}" alt="">
+          {% comment %} <img class="logo" src="{%static 'hostel/loginpage.png' %}" alt=""> {% endcomment %}
+          <img class="logo l1" src="{%static '/hostel/loginpage.png' %}" alt="">
       </div>
   </nav>
     <section class="showcase-area" id="showcase">
       <div class="showcase-container">
-        <h3>Welcome to </h3>
-        <h1 class="title1" id="home">HOSTEL MANAGEMENT SYSTEM</h1>
+        <div class="title1" id="home1">Welcome to the</div>
+        <div class="title1" id="home">HOSTEL MANAGEMENT SYSTEM</div>
       </div>
     </section>
     <section id="contact">
       <div class="contact-container container">
         <div class="contact-img">
-          <img src="{%static 'hostel/5124556.jpg' %}"alt="" />
+          <img src="{%static 'hostel/contact.jpg' %}"alt="" />
         </div>
 
         <div class="form-container">

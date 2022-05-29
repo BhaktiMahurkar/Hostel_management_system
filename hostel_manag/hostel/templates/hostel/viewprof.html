@@ -13,7 +13,128 @@
 
     <title>view student profile</title>
 </head>
+<style>
+  body{
+    background-color: #68a7ad;
+  }
+  .navbar input[type="checkbox"],
+.navbar .hamburger-lines {
+  display: none;
+}
+
+.navbar {
+  box-shadow: 0px 5px 10px 0px #aaa;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  color: #000;
+  opacity: 0.85;
+  height: 50px;
+  z-index: 12;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 64px;
+  align-items: center;
+}
+
+.menu-items {
+  order: 2;
+  display: flex;
+}
+
+.menu-items li {
+  list-style: none;
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.menu-items a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.menu-items a:hover {
+  color: #117964;
+  transition: color 0.3s ease-in-out;
+}
+
+/* ............//// Showcase styling ////......... */
+
+.showcase-area {
+  height: 50vh;
+  background: linear-gradient(
+      rgba(240, 240, 240, 0.144),
+      rgba(255, 255, 255, 0.336)
+    ),
+    url("https://thumbs.dreamstime.com/b/hotel-hostel-building-blue-sky-vector-illustration-94109452.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.showcase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.6rem;
+}
+
+.main-title {
+  margin: 0px;
+}
+.logo{
+        width: 65px;
+    margin-bottom: 20px;
+    margin-top: 2px;
+    float:left;
+      }
+      .n1{
+  height: 3.5rem;
+}
+.m1{
+  margin-top: 0.5rem;
+}
+.l1{
+  margin-top: 0.5rem;
+  float:left;
+}
+</style>
 <body>
+  <nav class="navbar n1">
+    <div class="navbar-container container n1">
+        <input type="checkbox" name="" id="">
+        <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
+        <ul class="menu-items m1">
+            <li><a href="{% url 'home-page' %}">Home</a></li>
+            <li><a href="{% url 'about_us' %}">About</a></li>
+            {% if request.user.is_staff %}
+            <li><a href="{% url 'student_details' %}">Student Details</a></li>
+            {% else %}
+            {% if canAccessProfile %}
+            <li><a href="{% url 'view_profile' std.pk %}">Profile</a></li>
+            {% else %}
+            <li><a href="{% url 'student_registration' %}">Fill Form</a></li>
+            {% endif %}
+            {% endif %}
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="{%url 'logout'%}">Logout</a></li>
+        </ul>
+        {% comment %} <img class="logo" src="{%static 'hostel/loginpage.png' %}" alt=""> {% endcomment %}
+        <img class="logo l1" src="{%static '/hostel/loginpage.png' %}" alt="">
+    </div>
+</nav>
   <div class="container">
 <div class="student-profile py-4">
     <div class="container">
@@ -21,7 +142,7 @@
         <div class="col-lg-4">
           <div class="card shadow-sm">
             <div class="card-header bg-transparent text-center">
-              <img class="profile_img" src="{{profile.sphoto.url}}" alt="">
+              <img class="profile_img" src="{{profile.sphoto.url}}" alt="dfdfdfsrvxfsfdsf">
               <h3>{{profile.fname}} {{profile.lname}}</h3>
             </div>
             <div class="card-body">

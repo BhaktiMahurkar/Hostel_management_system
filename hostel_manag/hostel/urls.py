@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from . views import PostUpdateView
-
+from django.conf.urls.static import static
+from hostel_manag import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,7 +36,10 @@ urlpatterns = [
     path('logout/',views.logout,name="logout"),
     path('profile/',views.profile,name="profile"),
     path('view_profile/<int:user_pk>',views.view_profile,name="view_profile"),
+    path('rules/',views.rules,name="rules"),
     # path('student_details/',views.student_details,name="student_details"),
-    #  path('post/<int:pk>/update',PostUpdateView.as_view(),name="post-update"),
+    # path('post/<int:pk>/update',PostUpdateView.as_view(),name="post-update"),
     # path('post/<int:pk>/delete',PostDeleteView.as_view(),name="post-delete"),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

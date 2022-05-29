@@ -88,13 +88,26 @@ from django.contrib.auth import login, authenticate  # add to imports
 #     return render(request,'hostel/viewprof.html')
 
 def home(request):
-    return render(request,'hostel/homepage.html')
+    
+    try: 
+        std = studentDetails.objects.get(fname=request.user)
+        if std.mob1:
+            canAccessProfile = True
+        else:
+            canAccessProfile = False
+    except:
+        canAccessProfile = False
+    info={'st': studentDetails.objects.all(),'user':User.first_name, 'canAccessProfile':canAccessProfile,'std':std}
+    return render(request,'hostel/homepage.html',info)
 
 def logout(request):
     return render(request,'hostel/logout.html')
 
 def aboutUs(request):
     return render(request,'hostel/about_us.html')
+
+def rules(request):
+    return render(request,'hostel/rules.html')
     
 def saveStudentDetails(request):
     if request.method =='POST':
@@ -122,11 +135,17 @@ def saveStudentDetails(request):
         gaddress=request.POST.get('gaddress')
         gnumber=request.POST.get('gnumber')
         sphoto=request.POST.get('sphoto')
+        
         aphoto=request.POST.get('aphoto')
         svaccine=request.POST.get('svaccine')
         certi=request.POST.get('certi')
         student=studentDetails(fname=sname,lname=pname,dob=dob,branch=branch,year=year,reg=reg,roll=roll,mob=address,mob1=snumber,mob2=pnumber,email1=semail,email2=pemail,hometown=hcity,state=state,caste=caste,nation=nation,aadhar=aadhar,pan=pan,blood=blood,allergy=allergy,guard=guard,gaddress=gaddress,gnumber=gnumber,sphoto=sphoto,aphoto=aphoto,svaccine=svaccine,certi=certi)
         student.save()
+        if student is not None:
+            messages.success(request, "Registration Successful!")
+        else:
+            messages.success(request, "Invalid data!")
+
     return render(request,'hostel/student_registration.html')
 def visitor_registration(request):
     return render(request,'hostel/visitor.html')
@@ -144,14 +163,7 @@ def facilities(request):
 
 def student_registration(request):
     return render(request,'hostel/student_registration.html')
-# <<<<<<< HEAD
-# =======
 
-# <<<<<<< HEAD
-# =======
-# # <<<<<<< HEAD
-# >>>>>>> dd1516d085a0d10181c8af695b0b7a5dafaa1c59
-# >>>>>>> d4208c7395e1a41fcf3cbbd951381dcadc4e2a0d
 @staff_member_required(redirect_field_name='login-page',  login_url='login-page')
 def student_details(request):
     s1={'student':studentDetails.objects.all()}
@@ -165,9 +177,9 @@ def add_student(request):
         name = request.POST['name1'].split()
         try:
             user = User.objects.create_user(username=uname, password = pass1)
-            user.first_name = name
+            user.first_name = name[0]
             user.save()
-            prof = studentDetails(user = user)
+            prof = studentDetails(fname = user)
             prof.fname = name[0]
             prof.lname = name[1]
             prof.save()
@@ -183,20 +195,19 @@ def add_student(request):
 # <<<<<<< HEAD
 # >>>>>>> d4208c7395e1a41fcf3cbbd951381dcadc4e2a0d
 def profile(request):
-    try: 
-        std = studentDetails.objects.get(user = request.user)
-        if std.mob1:
-            canAccessProfile = True
-        else:
-            canAccessProfile = False
-    except:
-        canAccessProfile = False
-    info={'st': studentDetails.objects.all(),'user':User.first_name, 'canAccessProfile':canAccessProfile}
+    # try: 
+    std = studentDetails.objects.get(user = request.user)
+    #     if std.mob1:
+    #         canAccessProfile = True
+    #     else:
+    #         canAccessProfile = False
+    # except:
+    #     canAccessProfile = False
+    info={
+        'std':std
+        }
     
     return render(request,'hostel/profile.html',info)
-
-
-
 def profile(request):
     return render(request,'hostel/profile.html')
 

@@ -1,8 +1,9 @@
 import email
 from django import forms
 from django.db import models
-from django.forms import CharField, EmailField, NumberInput,TimeInput,TimeField,DateField
+from django.forms import CharField, EmailField, NumberInput,TimeInput,TimeField,DateField , ImageField
 from django.contrib.auth.models import User
+from django.utils.html import mark_safe
 YEAR_CHOICES =[
     ('FE','FE'),
     ('SE', 'SE'),
@@ -29,11 +30,10 @@ class VisitorDetails(models.Model):
         return self.fname
 
 class studentDetails(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     fname=models.CharField(max_length=30, null=True)
     lname=models.CharField(max_length=30,default= " ",null=True)
     branch=models.CharField(max_length=30,null=True)
-   
-    
     year= models.CharField(max_length=6, choices=YEAR_CHOICES, default='FE',null=True)
     # year=models.CharField(max_length=30,null=True)
     reg=models.CharField(max_length=30,null=True)
@@ -62,4 +62,14 @@ class studentDetails(models.Model):
     certi=models.ImageField(null=True, upload_to='images/')
     def __str__(self):
         return self.fname 
+
+
+
+# class Model1(models.Model):
+#     sphoto = models.ImageField(upload_to='images/')
+
+#     def image_tag(self):
+#         return mark_safe('<img src="/images/%s" width="150" height="150" />' % (self.sphoto))
+
+#     image_tag.short_description = 'Image'
 

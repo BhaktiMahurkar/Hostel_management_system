@@ -15,16 +15,18 @@ body {
 body {
     display: grid;
     place-items: center;
-    background: #AB47BC
+    background-color: #68A7AD;
 }
 
 .card {
     color: #fff;
-    width: 350px;
+    width: 550px;
     border-radius: 10px;
-    background: linear-gradient(145deg, #9a40a9, #b74cc9);
-    box-shadow: 20px 20px 60px #913ca0, -20px -20px 60px #c552d8;
-    border: none
+    /* background: linear-gradient(145deg, #9a40a9, #b74cc9); */
+    box-shadow: 10px 10px 40px #9ea74d, -10px -10px 40px #515122;
+    background-color:#cbb184;
+    color:black;
+    border-color: #E5CB9F;
 }
 
 .neo-button {
